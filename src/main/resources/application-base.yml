@@ -1,0 +1,55 @@
+server:
+  port: 8080
+  servlet:
+    #    context-path: /api/ws
+    session:
+      timeout: 604800s
+      cookie:
+        max-age: 604800s
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+dev-auth: true
+spring:
+  kafka:
+    consumer:
+      topic-list: list
+      bootstrap-servers: localhost:9092
+      group-id: app.1
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      topic: parsed-item
+      topic-list: list
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+  freemarker:
+    expose-request-attributes: true
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/steam
+    username: postgres
+    password: 1234
+  liquibase:
+    change-log: classpath:liquibase/db.changelog-master.xml
+
+    drop-first: false
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+    jpa:
+      show-sql: true
+  main:
+    allow-bean-definition-overriding: true
+    allow-circular-references: true
+steam:
+  tax: 0.87
+  all-cs-item-url: https://steamcommunity.com/market/search/render/?search_descriptions=0&sort_column=default&sort_dir=desc&appid=730&norender=1&count=100
+parse:
+  page-size: 100
+data:
+  page-size: 100
