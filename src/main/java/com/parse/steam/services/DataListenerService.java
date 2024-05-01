@@ -2,7 +2,7 @@ package com.parse.steam.services;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.parse.steam.dtos.central.ItemDto;
+import com.parse.steam.dtos.OutputItemDto;
 import lombok.AllArgsConstructor;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
@@ -15,6 +15,6 @@ public class DataListenerService {
 
     @KafkaListener(topics = "${spring.kafka.consumer.topic-list}", groupId = "${spring.kafka.consumer.group-id}")
     public void listenerData(String message) throws JsonProcessingException {
-        updateDBService.insert(objectMapper.readValue(message, ItemDto.class));
+        updateDBService.insert(objectMapper.readValue(message, OutputItemDto.class));
     }
 }

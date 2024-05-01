@@ -1,0 +1,29 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet id="create_monitor-1" author="username">
+        <createSequence incrementBy="1" sequenceName="hibernate_sequence" startValue="1"/>
+        <createTable tableName="monitor">
+            <column name="id" type="serial">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_monitor"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="nits" type="INT"/>
+            <column name="diagonal" type="INT"/>
+            <column name="hz" type="INT"/>
+            <column name="gtg" type="INT"/>
+            <column name="hdmi" type="INT"/>
+            <column name="dp" type="INT"/>
+            <column name="vga" type="INT"/>
+            <column name="size_id" type="BIGINT"/>
+            <column name="brand_id" type="BIGINT"/>
+            <column name="matrix_id" type="BIGINT"/>
+            <column name="archived" type="BOOLEAN"/>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="brand_id" baseTableName="monitor" constraintName="FK_MONITOR_ON_BRAND" referencedColumnNames="id" referencedTableName="brand"/>
+        <addForeignKeyConstraint baseColumnNames="matrix_id" baseTableName="monitor" constraintName="FK_MONITOR_ON_MATRIX" referencedColumnNames="id" referencedTableName="monitor_matrix"/>
+        <addForeignKeyConstraint baseColumnNames="size_id" baseTableName="monitor" constraintName="FK_MONITOR_ON_SIZE" referencedColumnNames="id" referencedTableName="monitor_size"/>
+    </changeSet>
+</databaseChangeLog>

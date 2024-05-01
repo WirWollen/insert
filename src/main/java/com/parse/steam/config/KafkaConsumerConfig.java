@@ -1,6 +1,6 @@
 package com.parse.steam.config;
 
-import com.parse.steam.dtos.central.ItemDto;
+import com.parse.steam.dtos.OutputItemDto;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.LongDeserializer;
 import org.apache.kafka.common.serialization.StringDeserializer;
@@ -38,13 +38,13 @@ public class KafkaConsumerConfig {
 
     @Bean
     public KafkaListenerContainerFactory<?> kafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<Long, ItemDto> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        ConcurrentKafkaListenerContainerFactory<Long, OutputItemDto> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
         return factory;
     }
 
     @Bean
-    public ConsumerFactory<Long, ItemDto> consumerFactory() {
+    public ConsumerFactory<Long, OutputItemDto> consumerFactory() {
         return new DefaultKafkaConsumerFactory<>(consumerConfigs());
     }
 }

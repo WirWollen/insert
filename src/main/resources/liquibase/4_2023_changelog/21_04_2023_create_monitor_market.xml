@@ -1,0 +1,20 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet id="create_monitor_market-1" author="username">
+
+        <createSequence incrementBy="1" sequenceName="hibernate_sequence" startValue="1"/>
+        <createTable tableName="monitor_market">
+            <column name="id" type="serial">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_monitor_market"/>
+            </column>
+            <column name="market_id" type="BIGINT"/>
+            <column name="monitor_id" type="BIGINT"/>
+            <column name="url" type="VARCHAR(255)"/>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="market_id" baseTableName="monitor_market" constraintName="FK_MONITOR_MARKET_ON_MARKET" referencedColumnNames="id" referencedTableName="market"/>
+        <addForeignKeyConstraint baseColumnNames="monitor_id" baseTableName="monitor_market" constraintName="FK_MONITOR_MARKET_ON_MONITOR" referencedColumnNames="id" referencedTableName="monitor"/>
+    </changeSet>
+</databaseChangeLog>
