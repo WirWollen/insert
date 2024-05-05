@@ -2,6 +2,7 @@ package com.parse.steam.controllers;
 
 import com.parse.steam.dtos.MarketDto;
 import com.parse.steam.dtos.MonitorMarketDto;
+import com.parse.steam.exceptions.ElementIsArchivedException;
 import com.parse.steam.exceptions.ElementNotFoundException;
 import com.parse.steam.services.MonitorMarketService;
 import lombok.AllArgsConstructor;
@@ -51,12 +52,12 @@ public class MonitorMarketController {
     }
 
     @GetMapping("/insert-to-redis")
-    public MonitorMarketDto insertToRedis(@RequestParam Long id) throws ElementNotFoundException {
+    public MonitorMarketDto insertToRedis(@RequestParam Long id) throws ElementNotFoundException, ElementIsArchivedException {
         return service.insertToRedis(id);
     }
 
     @GetMapping("/delete-from-redis")
-    public MonitorMarketDto deleteFromRedis(@RequestParam Long id) throws ElementNotFoundException {
+    public MonitorMarketDto deleteFromRedis(@RequestParam Long id) throws ElementNotFoundException, ElementIsArchivedException {
         return service.deleteFromRedis(id);
     }
 }
