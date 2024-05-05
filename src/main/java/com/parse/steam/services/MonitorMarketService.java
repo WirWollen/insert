@@ -29,14 +29,14 @@ public class MonitorMarketService {
         return monitorMarketRepo.saveAll(dtoList.stream().map(MonitorMarketConverter::toEntity).toList()).stream().map(MonitorMarketConverter::toDto).toList();
     }
 
-    public MonitorMarketDto archiveMonitorMarket(MonitorMarketDto dto) throws ElementNotFoundException {
-        MonitorMarketEntity entity = monitorMarketRepo.findById(dto.getId()).orElseThrow(() -> new ElementNotFoundException("monitor-market not found"));
+    public MonitorMarketDto archiveMonitorMarket(Long id) throws ElementNotFoundException {
+        MonitorMarketEntity entity = monitorMarketRepo.findById(id).orElseThrow(() -> new ElementNotFoundException("monitor-market not found"));
         entity.setArchived(true);
         return MonitorMarketConverter.toDto(entity);
     }
 
-    public MonitorMarketDto unarchiveMonitorMarket(MonitorMarketDto dto) throws ElementNotFoundException {
-        MonitorMarketEntity entity = monitorMarketRepo.findById(dto.getId()).orElseThrow(() -> new ElementNotFoundException("monitor-market not found"));
+    public MonitorMarketDto unarchiveMonitorMarket(Long id) throws ElementNotFoundException {
+        MonitorMarketEntity entity = monitorMarketRepo.findById(id).orElseThrow(() -> new ElementNotFoundException("monitor-market not found"));
         entity.setArchived(false);
         return MonitorMarketConverter.toDto(entity);
     }
@@ -49,10 +49,6 @@ public class MonitorMarketService {
     }
 
     public MonitorMarketDto getMonitorMarketById(Long id) throws ElementNotFoundException {
-        return MonitorMarketConverter.toDto(monitorMarketRepo.findById(id).orElseThrow(() -> new ElementNotFoundException("monitor-market not found")));
-    }
-
-    public MonitorMarketDto getMonitorMarketByName(Long id) throws ElementNotFoundException {
         return MonitorMarketConverter.toDto(monitorMarketRepo.findById(id).orElseThrow(() -> new ElementNotFoundException("monitor-market not found")));
     }
 

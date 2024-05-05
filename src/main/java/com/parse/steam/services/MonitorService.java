@@ -24,14 +24,14 @@ public class MonitorService {
         return monitorRepo.saveAll(dtoList.stream().map(MonitorConverter::toEntity).toList()).stream().map(MonitorConverter::toDto).toList();
     }
 
-    public MonitorDto archiveMonitor(MonitorDto dto) throws ElementNotFoundException {
-        MonitorEntity entity = monitorRepo.findById(dto.getId()).orElseThrow(() -> new ElementNotFoundException("monitor not found"));
+    public MonitorDto archiveMonitor(Long id) throws ElementNotFoundException {
+        MonitorEntity entity = monitorRepo.findById(id).orElseThrow(() -> new ElementNotFoundException("monitor not found"));
         entity.setArchived(true);
         return MonitorConverter.toDto(entity);
     }
 
-    public MonitorDto unarchiveMonitor(MonitorDto dto) throws ElementNotFoundException {
-        MonitorEntity entity = monitorRepo.findById(dto.getId()).orElseThrow(() -> new ElementNotFoundException("monitor not found"));
+    public MonitorDto unarchiveMonitor(Long id) throws ElementNotFoundException {
+        MonitorEntity entity = monitorRepo.findById(id).orElseThrow(() -> new ElementNotFoundException("monitor not found"));
         entity.setArchived(false);
         return MonitorConverter.toDto(entity);
     }

@@ -26,14 +26,14 @@ public class MatrixService {
         return matrixRepo.saveAll(dtoList.stream().map(MatrixConverter::toEntity).toList()).stream().map(MatrixConverter::toDto).toList();
     }
 
-    public MatrixDto archiveMatrix(MatrixDto dto) throws ElementNotFoundException {
-        MatrixEntity entity = matrixRepo.findById(dto.getId()).orElseThrow(() -> new ElementNotFoundException("matrix not found"));
+    public MatrixDto archiveMatrix(Long id) throws ElementNotFoundException {
+        MatrixEntity entity = matrixRepo.findById(id).orElseThrow(() -> new ElementNotFoundException("matrix not found"));
         entity.setArchived(true);
         return MatrixConverter.toDto(entity);
     }
 
-    public MatrixDto unarchiveMatrix(MatrixDto dto) throws ElementNotFoundException {
-        MatrixEntity entity = matrixRepo.findById(dto.getId()).orElseThrow(() -> new ElementNotFoundException("matrix not found"));
+    public MatrixDto unarchiveMatrix(Long id) throws ElementNotFoundException {
+        MatrixEntity entity = matrixRepo.findById(id).orElseThrow(() -> new ElementNotFoundException("matrix not found"));
         entity.setArchived(false);
         return MatrixConverter.toDto(entity);
     }

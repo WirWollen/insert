@@ -26,14 +26,14 @@ public class MarketService {
         return marketRepo.saveAll(dtoList.stream().map(MarketConverter::toEntity).toList()).stream().map(MarketConverter::toDto).toList();
     }
 
-    public MarketDto archiveMarket(MarketDto dto) throws ElementNotFoundException {
-        MarketEntity entity = marketRepo.findById(dto.getId()).orElseThrow(() -> new ElementNotFoundException("brand not found"));
+    public MarketDto archiveMarket(Long id) throws ElementNotFoundException {
+        MarketEntity entity = marketRepo.findById(id).orElseThrow(() -> new ElementNotFoundException("brand not found"));
         entity.setArchived(true);
         return MarketConverter.toDto(entity);
     }
 
-    public MarketDto unarchiveMarket(MarketDto dto) throws ElementNotFoundException {
-        MarketEntity entity = marketRepo.findById(dto.getId()).orElseThrow(() -> new ElementNotFoundException("brand not found"));
+    public MarketDto unarchiveMarket(Long id) throws ElementNotFoundException {
+        MarketEntity entity = marketRepo.findById(id).orElseThrow(() -> new ElementNotFoundException("brand not found"));
         entity.setArchived(false);
         return MarketConverter.toDto(entity);
     }
@@ -49,8 +49,8 @@ public class MarketService {
         return MarketConverter.toDto(marketRepo.findById(id).orElseThrow(() -> new ElementNotFoundException("brand not found")));
     }
 
-    public MarketDto getMarketByName(Long id) throws ElementNotFoundException {
-        return MarketConverter.toDto(marketRepo.findById(id).orElseThrow(() -> new ElementNotFoundException("brand not found")));
+    public MarketDto getMarketByName(String name) throws ElementNotFoundException {
+        return MarketConverter.toDto(marketRepo.findByName(name).orElseThrow(() -> new ElementNotFoundException("brand not found")));
     }
 
     public List<MarketDto> getAllMarket() {

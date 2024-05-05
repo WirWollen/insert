@@ -24,14 +24,14 @@ public class SizeService {
         return sizeRepo.saveAll(dtoList.stream().map(SizeConverter::toEntity).toList()).stream().map(SizeConverter::toDto).toList();
     }
 
-    public SizeDto archiveSize(SizeDto dto) throws ElementNotFoundException {
-        SizeEntity entity = sizeRepo.findById(dto.getId()).orElseThrow(() -> new ElementNotFoundException("size not found"));
+    public SizeDto archiveSize(Long id) throws ElementNotFoundException {
+        SizeEntity entity = sizeRepo.findById(id).orElseThrow(() -> new ElementNotFoundException("size not found"));
         entity.setArchived(true);
         return SizeConverter.toDto(entity);
     }
 
-    public SizeDto unarchiveSize(SizeDto dto) throws ElementNotFoundException {
-        SizeEntity entity = sizeRepo.findById(dto.getId()).orElseThrow(() -> new ElementNotFoundException("size not found"));
+    public SizeDto unarchiveSize(Long id) throws ElementNotFoundException {
+        SizeEntity entity = sizeRepo.findById(id).orElseThrow(() -> new ElementNotFoundException("size not found"));
         entity.setArchived(false);
         return SizeConverter.toDto(entity);
     }

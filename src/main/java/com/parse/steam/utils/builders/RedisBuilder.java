@@ -10,6 +10,7 @@ public class RedisBuilder {
         outerDto.setId(entity.getId());
         outerDto.setShopName(ShopName.CITILINK);
         outerDto.setUrl(entity.getUrl());
+        outerDto.setCategoryId(1L);
         return outerDto;
     }
 }

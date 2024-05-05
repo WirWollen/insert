@@ -24,14 +24,14 @@ public class BrandService {
         return brandRepo.saveAll(dtoList.stream().map(BrandConverter::toEntity).toList()).stream().map(BrandConverter::toDto).toList();
     }
 
-    public BrandDto archiveBrand(BrandDto dto) throws ElementNotFoundException {
-        BrandEntity entity = brandRepo.findById(dto.getId()).orElseThrow(() -> new ElementNotFoundException("brand not found"));
+    public BrandDto archiveBrand(Long id) throws ElementNotFoundException {
+        BrandEntity entity = brandRepo.findById(id).orElseThrow(() -> new ElementNotFoundException("brand not found"));
         entity.setArchived(true);
         return BrandConverter.toDto(entity);
     }
 
-    public BrandDto unarchiveBrand(BrandDto dto) throws ElementNotFoundException {
-        BrandEntity entity = brandRepo.findById(dto.getId()).orElseThrow(() -> new ElementNotFoundException("brand not found"));
+    public BrandDto unarchiveBrand(Long id) throws ElementNotFoundException {
+        BrandEntity entity = brandRepo.findById(id).orElseThrow(() -> new ElementNotFoundException("brand not found"));
         entity.setArchived(false);
         return BrandConverter.toDto(entity);
     }
