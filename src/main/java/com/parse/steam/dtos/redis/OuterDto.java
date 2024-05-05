@@ -11,5 +11,6 @@ import lombok.Setter;
 @NoArgsConstructor
 public class OuterDto {
     private Long id;
+    private ShopName shopName;
     private String url;
 }

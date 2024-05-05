@@ -9,15 +9,17 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Table(name = "monitor_matrix")
+@Table(name = "monitor_size")
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class MonitorMatrixEntity extends BaseEntity {
-    @Column(name = "name")
-    private String name;
+public class SizeEntity extends BaseEntity {
+    @Column(name = "size_x")
+    private Integer sizeX;
+    @Column(name = "size_y")
+    private Integer sizeY;
     @Column(name = "archived")
     private Boolean archived;
 }

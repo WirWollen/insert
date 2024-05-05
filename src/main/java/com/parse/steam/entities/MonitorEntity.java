@@ -40,7 +40,7 @@ public class MonitorEntity extends BaseEntity {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "size_id")
-    private MonitorSizeEntity size;
+    private SizeEntity size;
 
     @Column(name = "size_id", updatable = false, insertable = false)
     private Long sizeId;
@@ -54,7 +54,7 @@ public class MonitorEntity extends BaseEntity {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "matrix_id")
-    private MonitorMatrixEntity matrix;
+    private MatrixEntity matrix;
 
     @Column(name = "matrix_id", updatable = false, insertable = false)
     private Long matrixId;

@@ -1,9 +1,7 @@
 package com.parse.steam.converters;
 
 import com.parse.steam.dtos.BrandDto;
-import com.parse.steam.dtos.SizeDto;
 import com.parse.steam.entities.BrandEntity;
-import com.parse.steam.entities.MonitorSizeEntity;
 import org.springframework.beans.BeanUtils;
 
 public class BrandConverter {

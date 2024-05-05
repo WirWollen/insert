@@ -14,20 +14,6 @@ spring:
   redis:
     host: localhost
     port: 6379
-  kafka:
-    consumer:
-      topic-list: list
-      bootstrap-servers: localhost:9092
-      group-id: app.1
-      auto-offset-reset: earliest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-    producer:
-      topic: parsed-item
-      topic-list: list
-      bootstrap-servers: localhost:9092
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
   freemarker:
     expose-request-attributes: true
 
@@ -53,4 +39,4 @@ parse:
   page-size: 100
 data:
   page-size: 100
-market: kuygyiuuoih
+market: citilink_monitor

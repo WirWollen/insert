@@ -1,7 +1,8 @@
 package com.parse.steam.controllers;
 
 import com.parse.steam.dtos.MonitorDto;
-import com.parse.steam.services.InsertModelService;
+import com.parse.steam.dtos.MonitorMarketDto;
+import com.parse.steam.services.MonitorService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,17 +10,22 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/monitor")
+@RequestMapping("/monitor/insert")
 public class InsertModelController {
-    private final InsertModelService insertModelService;
+    private final MonitorService monitorService;
 
-    @PostMapping("/insert")
+    @PostMapping("/monitor")
     public MonitorDto insertMonitor(@RequestBody MonitorDto dto) {
-        return insertModelService.insertMonitor(dto);
+        return monitorService.insertMonitor(dto);
     }
+
+//    @PostMapping("/monitor-market")
+//    public MonitorMarketDto insertMonitorMarket(@RequestBody MonitorMarketDto dto) {
+//        return monitorService.insertMonitorMarket(dto);
+//    }
 
     @PostMapping("/insert-all")
     public List<MonitorDto> insertMonitorList(@RequestBody List<MonitorDto> dtoList) {
-        return insertModelService.insertMonitorList(dtoList);
+        return monitorService.insertMonitorList(dtoList);
     }
 }
