@@ -5,6 +5,7 @@ import com.parse.steam.dtos.MonitorMarketDto;
 import com.parse.steam.dtos.redis.OuterDto;
 import com.parse.steam.dtos.redis.ShopName;
 import com.parse.steam.entities.MonitorMarketEntity;
+import com.parse.steam.exceptions.ElementIsArchivedException;
 import com.parse.steam.exceptions.ElementNotFoundException;
 import com.parse.steam.repo.MonitorMarketRepo;
 import com.parse.steam.repo.redis.RedisRepo;
@@ -56,16 +57,18 @@ public class MonitorMarketService {
         return monitorMarketRepo.findAll().stream().map(MonitorMarketConverter::toDto).toList();
     }
 
-    public MonitorMarketDto insertToRedis(Long id) throws ElementNotFoundException {
+    public MonitorMarketDto insertToRedis(Long id) throws ElementNotFoundException, ElementIsArchivedException {
         MonitorMarketEntity monitorMarketEntity = monitorMarketRepo.findById(id).orElseThrow(() -> new ElementNotFoundException("monitor-market not found"));
+        if (monitorMarketEntity.getArchived()) throw new ElementIsArchivedException("элемент архивирован");
         OuterDto redisDto = RedisBuilder.buildRedisDto(monitorMarketEntity);
         monitorMarketEntity.setInRedis(true);
         redisRepo.save(redisDto);
         return MonitorMarketConverter.toDto(monitorMarketRepo.save(monitorMarketEntity));
     }
 
-    public MonitorMarketDto deleteFromRedis(Long id) throws ElementNotFoundException {
+    public MonitorMarketDto deleteFromRedis(Long id) throws ElementNotFoundException, ElementIsArchivedException {
         MonitorMarketEntity monitorMarketEntity = monitorMarketRepo.findById(id).orElseThrow(() -> new ElementNotFoundException("monitor-market not found"));
+        if (monitorMarketEntity.getArchived()) throw new ElementIsArchivedException("элемент архивирован");
         monitorMarketEntity.setInRedis(false);
         redisRepo.delete(ShopName.CITILINK.getName(), id);
         return MonitorMarketConverter.toDto(monitorMarketRepo.save(monitorMarketEntity));
