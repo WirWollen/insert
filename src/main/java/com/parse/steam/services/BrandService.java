@@ -47,6 +47,10 @@ public class BrandService {
         return BrandConverter.toDto(brandRepo.findById(id).orElseThrow(() -> new ElementNotFoundException("brand not found")));
     }
 
+    public BrandDto getBrandByName(String name) throws ElementNotFoundException {
+        return BrandConverter.toDto(brandRepo.findByName(name).orElseThrow(() -> new ElementNotFoundException("brand not found")));
+    }
+
     public List<BrandDto> getAllBrand() {
         return brandRepo.findAllOrderByNameAsc().stream().map(BrandConverter::toDto).toList();
     }

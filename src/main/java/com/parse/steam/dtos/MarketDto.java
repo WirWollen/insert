@@ -14,4 +14,5 @@ public class MarketDto {
     private String guid;
     private String name;
     private String url;
+    private Boolean archived;
 }

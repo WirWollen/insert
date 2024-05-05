@@ -30,4 +30,10 @@ public class MonitorMarketEntity extends BaseEntity {
 
     @Column(name = "url")
     private String url;
+
+    @Column(name = "in_redis")
+    private Boolean inRedis;
+
+    @Column(name = "archived")
+    private Boolean archived;
 }

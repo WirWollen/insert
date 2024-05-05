@@ -24,4 +24,7 @@ public class MarketEntity extends BaseEntity {
 
     @Column(name = "url")
     private String url;
+
+    @Column(name = "archived")
+    private Boolean archived;
 }

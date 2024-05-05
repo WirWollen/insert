@@ -16,11 +16,11 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MonitorStatEntity extends BaseEntity {
-    @Column(name = "monitor_market_id", updatable = false, insertable = false)
+    @Column(name = "monitor_market_id")
     private Long monitorMarketId;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "monitor_market_id")
+    @JoinColumn(name = "monitor_market_id", updatable = false, insertable = false)
     private MonitorMarketEntity monitorMarketEntity;
 
     @Column(name = "price")

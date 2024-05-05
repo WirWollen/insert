@@ -13,6 +13,8 @@
             <column name="market_id" type="BIGINT"/>
             <column name="monitor_id" type="BIGINT"/>
             <column name="url" type="VARCHAR(255)"/>
+            <column name="in_redis" type="BOOLEAN"/>
+            <column name="archived" type="BOOLEAN"/>
         </createTable>
         <addForeignKeyConstraint baseColumnNames="market_id" baseTableName="monitor_market" constraintName="FK_MONITOR_MARKET_ON_MARKET" referencedColumnNames="id" referencedTableName="market"/>
         <addForeignKeyConstraint baseColumnNames="monitor_id" baseTableName="monitor_market" constraintName="FK_MONITOR_MARKET_ON_MONITOR" referencedColumnNames="id" referencedTableName="monitor"/>

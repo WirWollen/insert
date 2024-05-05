@@ -16,4 +16,6 @@ public class MonitorMarketDto {
     private Long monitorId;
     private MonitorDto monitorDto;
     private String url;
+    private Boolean inRedis;
+    private Boolean archived;
 }

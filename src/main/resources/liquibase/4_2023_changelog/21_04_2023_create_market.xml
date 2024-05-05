@@ -13,6 +13,7 @@
             <column name="guid" type="VARCHAR(255)"/>
             <column name="name" type="VARCHAR(255)"/>
             <column name="url" type="VARCHAR(255)"/>
+            <column name="archived" type="BOOLEAN"/>
         </createTable>
     </changeSet>
 </databaseChangeLog>
