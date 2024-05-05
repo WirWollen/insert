@@ -8,7 +8,7 @@ public class RedisBuilder {
     public static OuterDto buildRedisDto(MonitorMarketEntity entity) {
         OuterDto outerDto = new OuterDto();
         outerDto.setId(entity.getId());
-        outerDto.setShopName(ShopName.CITILINK);
+        outerDto.setShopName(ShopName.CITILINK.getName());
         outerDto.setUrl(entity.getUrl());
         outerDto.setCategoryId(1L);
         return outerDto;
