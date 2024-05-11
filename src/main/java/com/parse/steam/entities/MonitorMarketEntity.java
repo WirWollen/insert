@@ -14,18 +14,18 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MonitorMarketEntity extends BaseEntity {
-    @Column(name = "market_id", updatable = false, insertable = false)
+    @Column(name = "market_id")
     private Long marketId;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "market_id")
+    @JoinColumn(name = "market_id", updatable = false, insertable = false)
     private MarketEntity marketEntity;
 
-    @Column(name = "monitor_id", updatable = false, insertable = false)
+    @Column(name = "monitor_id")
     private Long monitorId;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "monitor_id")
+    @JoinColumn(name = "monitor_id", updatable = false, insertable = false)
     private MonitorEntity monitorEntity;
 
     @Column(name = "url")

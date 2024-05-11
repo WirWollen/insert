@@ -39,24 +39,24 @@ public class MonitorEntity extends BaseEntity {
     private Integer vga;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "size_id")
+    @JoinColumn(name = "size_id", updatable = false, insertable = false)
     private SizeEntity size;
 
-    @Column(name = "size_id", updatable = false, insertable = false)
+    @Column(name = "size_id")
     private Long sizeId;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "brand_id")
+    @JoinColumn(name = "brand_id", updatable = false, insertable = false)
     private BrandEntity brand;
 
-    @Column(name = "brand_id", updatable = false, insertable = false)
+    @Column(name = "brand_id")
     private Long brandId;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "matrix_id")
+    @JoinColumn(name = "matrix_id", updatable = false, insertable = false)
     private MatrixEntity matrix;
 
-    @Column(name = "matrix_id", updatable = false, insertable = false)
+    @Column(name = "matrix_id")
     private Long matrixId;
 
     @Column(name = "archived")

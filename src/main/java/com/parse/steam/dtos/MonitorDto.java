@@ -20,7 +20,10 @@ public class MonitorDto {
     private Integer dp;
     private Integer vga;
     private SizeDto size;
+    private Long sizeId;
     private BrandDto brand;
+    private Long brandId;
     private MatrixDto matrix;
+    private Long matrixId;
     private Boolean archived;
 }

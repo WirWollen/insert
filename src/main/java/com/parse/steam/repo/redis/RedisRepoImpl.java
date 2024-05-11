@@ -13,7 +13,7 @@ public class RedisRepoImpl implements RedisRepo {
     @Value(value = "${market}")
     private String redisKey;
 
-    private RedisTemplate<String, Object> redisTemplate;
+    private final RedisTemplate<String, Object> redisTemplate;
 
     private HashOperations<String, Long, OuterDto> hashOperations;
 
