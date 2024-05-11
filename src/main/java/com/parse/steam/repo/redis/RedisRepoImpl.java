@@ -35,7 +35,7 @@ public class RedisRepoImpl implements RedisRepo {
 
     @Override
     public boolean delete(String key, Long id) {
-        hashOperations.delete(key, id);
+        hashOperations.delete(redisKey, id);
         return true;
     }
 }

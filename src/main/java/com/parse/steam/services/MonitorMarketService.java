@@ -71,6 +71,6 @@ public class MonitorMarketService {
         if (monitorMarketEntity.getArchived()) throw new ElementIsArchivedException("элемент архивирован");
         monitorMarketEntity.setInRedis(false);
         redisRepo.delete(ShopName.CITILINK.getName(), id);
-        return MonitorMarketConverter.toDto(monitorMarketRepo.save(monitorMarketEntity));
+        return null;
     }
 }
