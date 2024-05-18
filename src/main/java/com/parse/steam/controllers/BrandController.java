@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://locathost:4200")
+@CrossOrigin(origins = "http://locathost:3000")
 @AllArgsConstructor
 @RestController
 @RequestMapping("/brand")
@@ -45,6 +45,7 @@ public class BrandController {
         return service.getBrandById(id);
     }
 
+    @CrossOrigin(origins = "http://locathost:3000")
     @GetMapping("/get-all")
     public List<BrandDto> getAllBrand() {
         return service.getAllBrand();

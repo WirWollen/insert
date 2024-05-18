@@ -40,3 +40,6 @@ parse:
 data:
   page-size: 100
 market: citilink_monitor
+logging:
+  level:
+    root: DEBUG
