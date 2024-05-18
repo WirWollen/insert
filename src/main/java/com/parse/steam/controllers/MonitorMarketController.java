@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://locathost:4200")
 @AllArgsConstructor
 @RestController
 @RequestMapping("/monitor-market")
