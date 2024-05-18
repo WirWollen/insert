@@ -38,4 +38,10 @@ public class RedisRepoImpl implements RedisRepo {
         hashOperations.delete(redisKey, id);
         return true;
     }
+
+    @Override
+    public boolean cleanRedis() {
+        redisTemplate.getConnectionFactory().getConnection().flushAll();
+        return true;
+    }
 }

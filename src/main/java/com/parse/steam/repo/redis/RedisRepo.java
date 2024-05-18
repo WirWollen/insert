@@ -7,4 +7,6 @@ public interface RedisRepo {
     boolean save(OuterDto emp);
 
     boolean delete(String key, Long id);
+
+    boolean cleanRedis();
 }

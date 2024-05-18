@@ -60,4 +60,9 @@ public class MonitorMarketController {
     public MonitorMarketDto deleteFromRedis(@RequestParam Long id) throws ElementNotFoundException, ElementIsArchivedException {
         return service.deleteFromRedis(id);
     }
+
+    @GetMapping("/clean-redis")
+    public boolean cleanRedis() {
+        return service.cleanRedis();
+    }
 }

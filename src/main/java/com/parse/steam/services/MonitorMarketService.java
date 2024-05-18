@@ -73,4 +73,8 @@ public class MonitorMarketService {
         redisRepo.delete(ShopName.CITILINK.getName(), id);
         return null;
     }
+
+    public boolean cleanRedis() {
+        return redisRepo.cleanRedis();
+    }
 }
