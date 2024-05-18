@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -17,6 +18,7 @@ public class BrandService {
     private final BrandRepo brandRepo;
 
     public BrandDto saveBrand(BrandDto dto) {
+        if (dto.getName() == null || Objects.equals(dto.getName(), "")) return null;
         return BrandConverter.toDto(brandRepo.save(BrandConverter.toEntity(dto)));
     }
 
@@ -27,13 +29,13 @@ public class BrandService {
     public BrandDto archiveBrand(Long id) throws ElementNotFoundException {
         BrandEntity entity = brandRepo.findById(id).orElseThrow(() -> new ElementNotFoundException("brand not found"));
         entity.setArchived(true);
-        return BrandConverter.toDto(entity);
+        return BrandConverter.toDto(brandRepo.save(entity));
     }
 
     public BrandDto unarchiveBrand(Long id) throws ElementNotFoundException {
         BrandEntity entity = brandRepo.findById(id).orElseThrow(() -> new ElementNotFoundException("brand not found"));
         entity.setArchived(false);
-        return BrandConverter.toDto(entity);
+        return BrandConverter.toDto(brandRepo.save(entity));
     }
 
     public BrandDto updateBrand(BrandDto dto) throws ElementNotFoundException {

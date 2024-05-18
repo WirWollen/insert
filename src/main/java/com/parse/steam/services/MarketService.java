@@ -29,13 +29,13 @@ public class MarketService {
     public MarketDto archiveMarket(Long id) throws ElementNotFoundException {
         MarketEntity entity = marketRepo.findById(id).orElseThrow(() -> new ElementNotFoundException("brand not found"));
         entity.setArchived(true);
-        return MarketConverter.toDto(entity);
+        return MarketConverter.toDto(marketRepo.save(entity));
     }
 
     public MarketDto unarchiveMarket(Long id) throws ElementNotFoundException {
         MarketEntity entity = marketRepo.findById(id).orElseThrow(() -> new ElementNotFoundException("brand not found"));
         entity.setArchived(false);
-        return MarketConverter.toDto(entity);
+        return MarketConverter.toDto(marketRepo.save(entity));
     }
 
     public MarketDto updateMarket(MarketDto dto) throws ElementNotFoundException {

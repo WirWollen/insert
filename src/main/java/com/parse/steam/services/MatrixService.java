@@ -29,13 +29,13 @@ public class MatrixService {
     public MatrixDto archiveMatrix(Long id) throws ElementNotFoundException {
         MatrixEntity entity = matrixRepo.findById(id).orElseThrow(() -> new ElementNotFoundException("matrix not found"));
         entity.setArchived(true);
-        return MatrixConverter.toDto(entity);
+        return MatrixConverter.toDto(matrixRepo.save(entity));
     }
 
     public MatrixDto unarchiveMatrix(Long id) throws ElementNotFoundException {
         MatrixEntity entity = matrixRepo.findById(id).orElseThrow(() -> new ElementNotFoundException("matrix not found"));
         entity.setArchived(false);
-        return MatrixConverter.toDto(entity);
+        return MatrixConverter.toDto(matrixRepo.save(entity));
     }
 
     public MatrixDto updateMatrix(MatrixDto dto) throws ElementNotFoundException {

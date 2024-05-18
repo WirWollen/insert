@@ -27,13 +27,13 @@ public class SizeService {
     public SizeDto archiveSize(Long id) throws ElementNotFoundException {
         SizeEntity entity = sizeRepo.findById(id).orElseThrow(() -> new ElementNotFoundException("size not found"));
         entity.setArchived(true);
-        return SizeConverter.toDto(entity);
+        return SizeConverter.toDto(sizeRepo.save(entity));
     }
 
     public SizeDto unarchiveSize(Long id) throws ElementNotFoundException {
         SizeEntity entity = sizeRepo.findById(id).orElseThrow(() -> new ElementNotFoundException("size not found"));
         entity.setArchived(false);
-        return SizeConverter.toDto(entity);
+        return SizeConverter.toDto(sizeRepo.save(entity));
     }
 
     public SizeDto updateSize(SizeDto dto) throws ElementNotFoundException {
