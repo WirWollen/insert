@@ -27,13 +27,13 @@ public class MonitorService {
     public MonitorDto archiveMonitor(Long id) throws ElementNotFoundException {
         MonitorEntity entity = monitorRepo.findById(id).orElseThrow(() -> new ElementNotFoundException("monitor not found"));
         entity.setArchived(true);
-        return MonitorConverter.toDto(entity);
+        return MonitorConverter.toDto(monitorRepo.save(entity));
     }
 
     public MonitorDto unarchiveMonitor(Long id) throws ElementNotFoundException {
         MonitorEntity entity = monitorRepo.findById(id).orElseThrow(() -> new ElementNotFoundException("monitor not found"));
         entity.setArchived(false);
-        return MonitorConverter.toDto(entity);
+        return MonitorConverter.toDto(monitorRepo.save(entity));
     }
 
     public MonitorDto updateMonitor(MonitorDto dto) throws ElementNotFoundException {

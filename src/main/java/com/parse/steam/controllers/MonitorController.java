@@ -11,7 +11,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://locathost:4200")
 @AllArgsConstructor
 @RestController
-@RequestMapping("/monitor/insert")
+@RequestMapping("/monitor")
 public class MonitorController {
     private final MonitorService service;
 
