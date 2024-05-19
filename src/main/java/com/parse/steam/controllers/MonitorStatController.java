@@ -1,5 +1,6 @@
 package com.parse.steam.controllers;
 
+import com.parse.steam.dtos.stat.PriceTimeDto;
 import com.parse.steam.dtos.stat.StatCountMonitorMarketDto;
 import com.parse.steam.dtos.stat.StatElDto;
 import com.parse.steam.dtos.stat.StatLowestPriceDto;
@@ -16,8 +17,8 @@ import java.util.List;
 public class MonitorStatController {
     private final MonitorStatService service;
 
-    @PostMapping("/get-all-by-item-id")
-    public List<StatElDto> findAllStatByMonitorId(@RequestParam Long itemId) {
+    @PostMapping("/get-all-stat-by-item-id")
+    public List<PriceTimeDto> findAllStatByMonitorId(@RequestParam Long itemId) {
         return service.findAllStatByMonitorId(itemId);
     }
 

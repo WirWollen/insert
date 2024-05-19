@@ -12,25 +12,30 @@ public interface MonitorStatRepo extends JpaRepository<MonitorStatEntity, Long> 
             "from monitor_stat ms " +
             "join monitor_market mm on ms.monitor_market_id = mm.id " +
             "where mm.monitor_id = :itemId " +
-            "and mm.monitor_id = :marketId ", nativeQuery = true)
+            "and mm.market_id = :marketId " +
+            "order by moment desc", nativeQuery = true)
     List<MonitorStatEntity> findAllByItemIdAndId(@Param("itemId") Long itemId,
                                                  @Param("marketId") Long marketId);
 
     @Query(value = "SELECT ms.* " +
             "FROM monitor_stat ms " +
             "JOIN monitor_market mm on mm.id = ms.monitor_market_id " +
-            "WHERE ms.monitor_market_id = :monitorMarketId " +
-            "AND ms.moment = (SELECT MAX(moment) FROM monitor_stat WHERE monitor_market_id = :monitorMarketId) " +
+            "WHERE mm.market_id = :marketId " +
+            "AND ms.moment = (SELECT MAX(moment) FROM monitor_stat " +
+            "JOIN monitor_market on monitor_stat.monitor_market_id = monitor_market.id " +
+            "WHERE market_id = :marketId) " +
             "AND mm.monitor_id = :monitorId ", nativeQuery = true)
-    MonitorStatEntity findLastPrice(@Param("monitorMarketId") Long monitorMarketId,
+    MonitorStatEntity findLastPrice(@Param("marketId") Long marketId,
                                     @Param("monitorId") Long monitorId);
 
     @Query(value = "SELECT ms.* " +
             "FROM monitor_stat ms " +
             "JOIN monitor_market mm on mm.id = ms.monitor_market_id " +
-            "WHERE ms.monitor_market_id = :monitorMarketId " +
-            "AND ms.price = (SELECT MIN(price) FROM monitor_stat WHERE monitor_market_id = :monitorMarketId) " +
+            "WHERE mm.market_id = :marketId " +
+            "AND ms.price = (SELECT MIN(price) FROM monitor_stat " +
+            "JOIN monitor_market on monitor_stat.monitor_market_id = monitor_market.id " +
+            "WHERE market_id = :marketId) " +
             "AND mm.monitor_id = :monitorId ", nativeQuery = true)
-    MonitorStatEntity findLowestPrice(@Param("monitorMarketId") Long monitorMarketId,
+    MonitorStatEntity findLowestPrice(@Param("marketId") Long marketId,
                                       @Param("monitorId") Long monitorId);
 }

@@ -2,9 +2,7 @@ package com.parse.steam.services;
 
 import com.parse.steam.converters.MarketConverter;
 import com.parse.steam.converters.MonitorStatConverter;
-import com.parse.steam.dtos.stat.StatCountMonitorMarketDto;
-import com.parse.steam.dtos.stat.StatElDto;
-import com.parse.steam.dtos.stat.StatLowestPriceDto;
+import com.parse.steam.dtos.stat.*;
 import com.parse.steam.repo.MarketRepo;
 import com.parse.steam.repo.MonitorMarketRepo;
 import com.parse.steam.repo.MonitorStatRepo;
@@ -20,11 +18,12 @@ public class MonitorStatService {
     private final MonitorMarketRepo monitorMarketRepo;
     private final MarketRepo marketRepo;
 
-    public List<StatElDto> findAllStatByMonitorId(Long itemId) {
+    public List<PriceTimeDto> findAllStatByMonitorId(Long itemId) {
         return marketRepo.findAll().stream().map(MarketConverter::toDto)
                 .toList().stream()
-                .map(el -> new StatElDto(el.getName(), monitorStatRepo.findAllByItemIdAndId(itemId, el.getId())
-                        .stream().map(MonitorStatConverter::toDto).toList())).toList();
+                .map(el -> new PriceTimeDto(el.getName(),
+                        monitorStatRepo.findAllByItemIdAndId(itemId, el.getId()).stream().map(
+                                el2 ->  new TimePriceDto(el2.getMoment(), el2.getPrice())).toList())).toList();
     }
 
     public List<StatCountMonitorMarketDto> countMonitorMarket() {
@@ -46,7 +45,8 @@ public class MonitorStatService {
                     StatLowestPriceDto dto = new StatLowestPriceDto();
                     dto.setMarketName(el.getName());
                     Long price = 0L;
-                    if (monitorStatRepo.findLastPrice(el.getId(), itemId) != null) price = dto.getPrice();
+                    var entity = monitorStatRepo.findLastPrice(el.getId(), itemId);
+                    if (entity != null) price = entity.getPrice();
                     dto.setPrice(price);
                     dto.setUrl(el.getUrl());
                     return dto;
@@ -60,7 +60,8 @@ public class MonitorStatService {
                     StatLowestPriceDto dto = new StatLowestPriceDto();
                     dto.setMarketName(el.getName());
                     Long price = 0L;
-                    if (monitorStatRepo.findLowestPrice(el.getId(), itemId) != null) price = dto.getPrice();
+                    var entity = monitorStatRepo.findLowestPrice(el.getId(), itemId);
+                    if (entity != null) price = entity.getPrice();
                     dto.setPrice(price);
                     dto.setUrl(el.getUrl());
                     return dto;
