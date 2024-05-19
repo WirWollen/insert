@@ -33,13 +33,13 @@ public class MonitorMarketService {
     public MonitorMarketDto archiveMonitorMarket(Long id) throws ElementNotFoundException {
         MonitorMarketEntity entity = monitorMarketRepo.findById(id).orElseThrow(() -> new ElementNotFoundException("monitor-market not found"));
         entity.setArchived(true);
-        return MonitorMarketConverter.toDto(entity);
+        return MonitorMarketConverter.toDto(monitorMarketRepo.save(entity));
     }
 
     public MonitorMarketDto unarchiveMonitorMarket(Long id) throws ElementNotFoundException {
         MonitorMarketEntity entity = monitorMarketRepo.findById(id).orElseThrow(() -> new ElementNotFoundException("monitor-market not found"));
         entity.setArchived(false);
-        return MonitorMarketConverter.toDto(entity);
+        return MonitorMarketConverter.toDto(monitorMarketRepo.save(entity));
     }
 
     public MonitorMarketDto updateMonitorMarket(MonitorMarketDto dto) throws ElementNotFoundException {
