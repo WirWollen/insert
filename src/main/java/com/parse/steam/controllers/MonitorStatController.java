@@ -1,6 +1,8 @@
 package com.parse.steam.controllers;
 
+import com.parse.steam.dtos.stat.StatCountMonitorMarketDto;
 import com.parse.steam.dtos.stat.StatElDto;
+import com.parse.steam.dtos.stat.StatLowestPriceDto;
 import com.parse.steam.services.MonitorStatService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -14,10 +16,28 @@ import java.util.List;
 public class MonitorStatController {
     private final MonitorStatService service;
 
-    @PostMapping("/get-by-item-id")
-    public List<StatElDto> saveMonitor(@RequestParam Long itemId) {
-        return service.findStatByMonitorId(itemId);
+    @PostMapping("/get-all-by-item-id")
+    public List<StatElDto> findAllStatByMonitorId(@RequestParam Long itemId) {
+        return service.findAllStatByMonitorId(itemId);
     }
 
+    @PostMapping("/count-monitor-market")
+    public List<StatCountMonitorMarketDto> countMonitorMarket() {
+        return service.countMonitorMarket();
+    }
 
+    @PostMapping("/count-monitor-in-redis")
+    public List<StatCountMonitorMarketDto> countMonitorMarketInRedis() {
+        return service.countMonitorMarketInRedis();
+    }
+
+    @PostMapping("/find-current-prices")
+    public List<StatLowestPriceDto> findCurrentPrices(@RequestParam Long itemId) {
+        return service.findCurrentPrices(itemId);
+    }
+
+    @PostMapping("/find-lowest-prices")
+    public List<StatLowestPriceDto> findLowestPrices(@RequestParam Long itemId) {
+        return service.findLowestPrices(itemId);
+    }
 }

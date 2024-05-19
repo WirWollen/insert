@@ -15,4 +15,22 @@ public interface MonitorStatRepo extends JpaRepository<MonitorStatEntity, Long> 
             "and mm.monitor_id = :marketId ", nativeQuery = true)
     List<MonitorStatEntity> findAllByItemIdAndId(@Param("itemId") Long itemId,
                                                  @Param("marketId") Long marketId);
+
+    @Query(value = "SELECT ms.* " +
+            "FROM monitor_stat ms " +
+            "JOIN monitor_market mm on mm.id = ms.monitor_market_id " +
+            "WHERE ms.monitor_market_id = :monitorMarketId " +
+            "AND ms.moment = (SELECT MAX(moment) FROM monitor_stat WHERE monitor_market_id = :monitorMarketId) " +
+            "AND mm.monitor_id = :monitorId ", nativeQuery = true)
+    MonitorStatEntity findLastPrice(@Param("monitorMarketId") Long monitorMarketId,
+                                    @Param("monitorId") Long monitorId);
+
+    @Query(value = "SELECT ms.* " +
+            "FROM monitor_stat ms " +
+            "JOIN monitor_market mm on mm.id = ms.monitor_market_id " +
+            "WHERE ms.monitor_market_id = :monitorMarketId " +
+            "AND ms.price = (SELECT MIN(price) FROM monitor_stat WHERE monitor_market_id = :monitorMarketId) " +
+            "AND mm.monitor_id = :monitorId ", nativeQuery = true)
+    MonitorStatEntity findLowestPrice(@Param("monitorMarketId") Long monitorMarketId,
+                                      @Param("monitorId") Long monitorId);
 }
