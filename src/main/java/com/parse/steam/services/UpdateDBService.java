@@ -2,7 +2,7 @@ package com.parse.steam.services;
 
 import com.parse.steam.dtos.OutputItemDto;
 import com.parse.steam.entities.MonitorStatEntity;
-import com.parse.steam.repo.parsed.MonitorStatRepo;
+import com.parse.steam.repo.MonitorStatRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
