@@ -18,8 +18,8 @@ public class MonitorStatController {
     private final MonitorStatService service;
 
     @PostMapping("/get-all-stat-by-item-id")
-    public List<PriceTimeDto> findAllStatByMonitorId(@RequestParam Long itemId) {
-        return service.findAllStatByMonitorId(itemId);
+    public PriceTimeDto findAllStatByMonitorId(@RequestParam Long itemId, @RequestParam Long marketId) {
+        return service.findStatByMonitorId(itemId, marketId);
     }
 
     @PostMapping("/count-monitor-market")

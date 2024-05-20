@@ -1,7 +1,6 @@
 package com.parse.steam.services;
 
 import com.parse.steam.converters.MarketConverter;
-import com.parse.steam.converters.MonitorStatConverter;
 import com.parse.steam.dtos.stat.*;
 import com.parse.steam.repo.MarketRepo;
 import com.parse.steam.repo.MonitorMarketRepo;
@@ -18,12 +17,11 @@ public class MonitorStatService {
     private final MonitorMarketRepo monitorMarketRepo;
     private final MarketRepo marketRepo;
 
-    public List<PriceTimeDto> findAllStatByMonitorId(Long itemId) {
-        return marketRepo.findAll().stream().map(MarketConverter::toDto)
-                .toList().stream()
-                .map(el -> new PriceTimeDto(el.getName(),
-                        monitorStatRepo.findAllByItemIdAndId(itemId, el.getId()).stream().map(
-                                el2 ->  new TimePriceDto(el2.getMoment(), el2.getPrice())).toList())).toList();
+    public PriceTimeDto findStatByMonitorId(Long itemId, Long marketId) {
+        var market = marketRepo.findById(marketId).get();
+        return new PriceTimeDto(market.getName(),
+                monitorStatRepo.findAllByItemIdAndId(itemId, market.getId()).stream().map(
+                        el -> new TimePriceDto(el.getMoment(), el.getPrice())).toList());
     }
 
     public List<StatCountMonitorMarketDto> countMonitorMarket() {
