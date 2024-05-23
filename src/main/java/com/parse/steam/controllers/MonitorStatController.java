@@ -17,9 +17,14 @@ import java.util.List;
 public class MonitorStatController {
     private final MonitorStatService service;
 
-    @PostMapping("/get-all-stat-by-item-id")
-    public PriceTimeDto findAllStatByMonitorId(@RequestParam Long itemId, @RequestParam Long marketId) {
+    @PostMapping("/get-stat-by-item-id")
+    public PriceTimeDto findStatByMonitorId(@RequestParam Long itemId, @RequestParam Long marketId) {
         return service.findStatByMonitorId(itemId, marketId);
+    }
+
+    @PostMapping("/get-all-stat-by-item-id")
+    public List<PriceTimeDto> findAllStatByMonitorId(@RequestParam Long itemId) {
+        return service.findAllStatByMonitorId(itemId);
     }
 
     @PostMapping("/count-monitor-market")

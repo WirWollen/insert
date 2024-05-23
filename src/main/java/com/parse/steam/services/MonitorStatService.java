@@ -24,6 +24,12 @@ public class MonitorStatService {
                         el -> new TimePriceDto(el.getMoment(), el.getPrice())).toList());
     }
 
+    public List<PriceTimeDto> findAllStatByMonitorId(Long itemId) {
+        return marketRepo.findAll().stream().map(el2 -> new PriceTimeDto(el2.getName(),
+                monitorStatRepo.findAllByItemIdAndId(itemId, el2.getId()).stream().map(
+                        el -> new TimePriceDto(el.getMoment(), el.getPrice())).toList())).toList();
+    }
+
     public List<StatCountMonitorMarketDto> countMonitorMarket() {
         return marketRepo.findAll().stream().map(MarketConverter::toDto)
                 .toList().stream()
