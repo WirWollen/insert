@@ -19,14 +19,14 @@ public class TVMarketEntity extends BaseEntity {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "market_id", updatable = false, insertable = false)
-    private MarketEntity marketEntity;
+    private MarketEntity market;
 
     @Column(name = "tv_id")
     private Long tvId;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "tv_id", updatable = false, insertable = false)
-    private TVEntity tvEntity;
+    private TVEntity tv;
 
     @Column(name = "url")
     private String url;

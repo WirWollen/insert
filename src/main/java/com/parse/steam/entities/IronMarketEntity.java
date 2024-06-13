@@ -19,14 +19,14 @@ public class IronMarketEntity extends BaseEntity {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "market_id", updatable = false, insertable = false)
-    private MarketEntity marketEntity;
+    private MarketEntity market;
 
     @Column(name = "iron_id")
     private Long ironId;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "iron_id", updatable = false, insertable = false)
-    private IronEntity ironEntity;
+    private IronEntity iron;
 
     @Column(name = "url")
     private String url;
