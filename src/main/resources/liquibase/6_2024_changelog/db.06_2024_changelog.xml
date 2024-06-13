@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <include relativeToChangelogFile="true" file="13_06_2023_create_iron_sole.xml"/>
+    <include relativeToChangelogFile="true" file="13_06_2023_create_wash_tech.xml"/>
+    <include relativeToChangelogFile="true" file="13_06_2023_create_screen_tech.xml"/>
+    <include relativeToChangelogFile="true" file="13_06_2023_create_os.xml"/>
+    <include relativeToChangelogFile="true" file="13_06_2023_create_iron.xml"/>
+    <include relativeToChangelogFile="true" file="13_06_2023_create_washing_machine.xml"/>
+    <include relativeToChangelogFile="true" file="13_06_2023_create_tv.xml"/>
+    <include relativeToChangelogFile="true" file="13_06_2023_create_iron_market.xml"/>
+    <include relativeToChangelogFile="true" file="13_06_2023_create_iron_stat.xml"/>
+    <include relativeToChangelogFile="true" file="13_06_2023_create_washing_machine_market.xml"/>
+    <include relativeToChangelogFile="true" file="13_06_2023_create_washing_machine_stat.xml"/>
+    <include relativeToChangelogFile="true" file="13_06_2023_create_tv_market.xml"/>
+    <include relativeToChangelogFile="true" file="13_06_2023_create_tv_stat.xml"/>
+</databaseChangeLog>

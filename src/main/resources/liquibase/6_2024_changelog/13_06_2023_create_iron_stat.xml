@@ -1,0 +1,17 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet id="create_iron_stat-1" author="username">
+        <createSequence incrementBy="1" sequenceName="hibernate_sequence" startValue="1"/>
+        <createTable tableName="iron_stat">
+            <column name="id" type="serial">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_iron_stat"/>
+            </column>
+            <column name="iron_market_id" type="BIGINT"/>
+            <column name="price" type="BIGINT"/>
+            <column name="moment" type="DATETIME"/>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="iron_market_id" baseTableName="iron_stat" constraintName="FK_IRON_STAT_ON_IRON_MARKET" referencedColumnNames="id" referencedTableName="iron_market"/>
+    </changeSet>
+</databaseChangeLog>

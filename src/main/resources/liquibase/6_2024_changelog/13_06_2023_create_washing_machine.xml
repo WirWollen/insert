@@ -1,0 +1,22 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet id="create_washing_machine-1" author="username">
+        <createSequence incrementBy="1" sequenceName="hibernate_sequence" startValue="1"/>
+        <createTable tableName="washing_machine">
+            <column name="id" type="serial">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_washing_machine"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="display" type="BOOLEAN"/>
+            <column name="depth" type="INT"/>
+            <column name="vertical_load_type" type="BOOLEAN"/>
+            <column name="brand_id" type="BIGINT"/>
+            <column name="wash_tech_id" type="BIGINT"/>
+            <column name="archived" type="BOOLEAN"/>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="brand_id" baseTableName="washing_machine" constraintName="FK_WASHING_MACHINE_ON_BRAND" referencedColumnNames="id" referencedTableName="brand"/>
+        <addForeignKeyConstraint baseColumnNames="wash_tech_id" baseTableName="washing_machine" constraintName="FK_WASHING_MACHINE_ON_WASH_TECH" referencedColumnNames="id" referencedTableName="wash_tech"/>
+    </changeSet>
+</databaseChangeLog>

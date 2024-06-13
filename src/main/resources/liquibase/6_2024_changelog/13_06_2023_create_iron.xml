@@ -1,0 +1,24 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet id="create_iron-1" author="username">
+        <createSequence incrementBy="1" sequenceName="hibernate_sequence" startValue="1"/>
+        <createTable tableName="iron">
+            <column name="id" type="serial">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_iron"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="auto_off" type="BOOLEAN"/>
+            <column name="steam_boost" type="BOOLEAN"/>
+            <column name="power" type="INT"/>
+            <column name="auto_clean" type="BOOLEAN"/>
+            <column name="anti_drip_system" type="BOOLEAN"/>
+            <column name="brand_id" type="BIGINT"/>
+            <column name="iron_sole_id" type="BIGINT"/>
+            <column name="archived" type="BOOLEAN"/>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="brand_id" baseTableName="iron" constraintName="FK_IRON_ON_BRAND" referencedColumnNames="id" referencedTableName="brand"/>
+        <addForeignKeyConstraint baseColumnNames="iron_sole_id" baseTableName="iron" constraintName="FK_IRON_ON_IRON_SOLE" referencedColumnNames="id" referencedTableName="iron_sole"/>
+    </changeSet>
+</databaseChangeLog>

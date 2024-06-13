@@ -1,0 +1,20 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet id="create_washing_machine_market-1" author="username">
+        <createSequence incrementBy="1" sequenceName="hibernate_sequence" startValue="1"/>
+        <createTable tableName="washing_machine_market">
+            <column name="id" type="serial">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_washing_machine_market"/>
+            </column>
+            <column name="market_id" type="BIGINT"/>
+            <column name="washing_machine_id" type="BIGINT"/>
+            <column name="url" type="VARCHAR(255)"/>
+            <column name="in_redis" type="BOOLEAN"/>
+            <column name="archived" type="BOOLEAN"/>
+        </createTable>
+        <addForeignKeyConstraint baseColumnNames="market_id" baseTableName="washing_machine_market" constraintName="FK_WASHING_MACHINE_MARKET_ON_MARKET" referencedColumnNames="id" referencedTableName="market"/>
+        <addForeignKeyConstraint baseColumnNames="washing_machine_id" baseTableName="washing_machine_market" constraintName="FK_WASHING_MACHINE_MARKET_ON_WASHING_MACHINE" referencedColumnNames="id" referencedTableName="washing_machine"/>
+    </changeSet>
+</databaseChangeLog>
