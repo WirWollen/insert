@@ -10,6 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class IronMarketDto {
+    private Long id;
     private Long marketId;
     private MarketDto market;
     private Long ironId;

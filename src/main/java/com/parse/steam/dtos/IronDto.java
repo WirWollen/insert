@@ -10,6 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class IronDto {
+    private Long id;
     private String name;
     private Boolean autoOff;
     private Boolean steamBoost;

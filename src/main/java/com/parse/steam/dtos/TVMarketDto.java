@@ -10,6 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TVMarketDto {
+    private Long id;
     private Long marketId;
     private MarketDto market;
     private Long tvId;

@@ -10,6 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class WashingMachineDto {
+    private Long id;
     private String name;
     private Boolean display;
     private Integer depth;
