@@ -1,6 +1,7 @@
 package com.parse.steam.controllers;
 
 import com.parse.steam.dtos.MonitorDto;
+import com.parse.steam.dtos.stat.PredicateDto;
 import com.parse.steam.exceptions.ElementNotFoundException;
 import com.parse.steam.services.MonitorService;
 import lombok.AllArgsConstructor;
@@ -48,5 +49,10 @@ public class MonitorController {
     @GetMapping("/get-all")
     public List<MonitorDto> getAllMonitor() {
         return service.getAllMonitor();
+    }
+
+    @GetMapping("/predicate")
+    public List<PredicateDto> predicatePrice(@RequestParam Long itemId) {
+        return service.predicateUpPrice(itemId);
     }
 }

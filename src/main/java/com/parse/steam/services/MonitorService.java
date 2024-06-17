@@ -78,9 +78,11 @@ public class MonitorService {
         Map<Long, MonitorStatEntity> monitorStatEntityMap = new HashMap<>();
         allMarkets.forEach(el -> {
             List<MonitorStatEntity> entities = monitorStatRepo.findByInterval(el.getId());
-            monitorStatEntityMap.put(el.getId(), entities.get(0));
-            marketMonitorStatElementsMap.put(el.getId(), entities);
-            marketMonitorStatPriceMap.put(el.getId(), entities.get(0).getPrice());
+            if (entities.size() > 0) {
+                monitorStatEntityMap.put(el.getId(), entities.get(0));
+                marketMonitorStatElementsMap.put(el.getId(), entities);
+                marketMonitorStatPriceMap.put(el.getId(), entities.get(0).getPrice());
+            }
         });
 
         marketMonitorStatElementsMap.keySet().forEach(el -> {
@@ -99,42 +101,44 @@ public class MonitorService {
             marketPriceInfo.put(el, isUp);
         });
 
-        Long middlePrice = marketMonitorStatPriceMap.values().stream().mapToLong(Long::longValue).sum() / marketMonitorStatPriceMap.values().size();
-        Long maxPrice = marketMonitorStatPriceMap.values().stream().mapToLong(Long::longValue).max().getAsLong();
-        Long minPrice = marketMonitorStatPriceMap.values().stream().mapToLong(Long::longValue).min().getAsLong();
+        if (!marketMonitorStatPriceMap.values().isEmpty()) {
+            Long middlePrice = marketMonitorStatPriceMap.values().stream().mapToLong(Long::longValue).sum() / marketMonitorStatPriceMap.values().size();
+            Long maxPrice = marketMonitorStatPriceMap.values().stream().mapToLong(Long::longValue).max().getAsLong();
+            Long minPrice = marketMonitorStatPriceMap.values().stream().mapToLong(Long::longValue).min().getAsLong();
 
-        marketMonitorStatPriceMap.keySet().forEach(el -> {
-            String status = "Цена опустится";
-            Long price = marketMonitorStatPriceMap.get(el);
-            double rating = 1;
+            marketMonitorStatPriceMap.keySet().forEach(el -> {
+                String status = "Цена опустится";
+                Long price = marketMonitorStatPriceMap.get(el);
+                double rating = 1;
 
-            if (price < middlePrice) {
-                rating = rating * 1.2;
-            } else if (price > middlePrice) {
-                rating = rating * 0.8;
-            }
+                if (price < middlePrice) {
+                    rating = rating * 1.2;
+                } else if (price > middlePrice) {
+                    rating = rating * 0.8;
+                }
 
-            if (marketPriceInfo.get(el)) {
-                rating = rating * 0.8;
-            } else if (!marketPriceInfo.get(el)) {
-                rating = rating * 1.3;
-            }
+                if (marketPriceInfo.get(el)) {
+                    rating = rating * 0.8;
+                } else if (!marketPriceInfo.get(el)) {
+                    rating = rating * 1.3;
+                }
 
-            if (price >= minPrice && price < minPrice * 1.02) {
-                rating = rating * 1.4;
-            } else if (price > maxPrice * 0.97 && price <= maxPrice) {
-                rating = rating * 0.7;
-            }
+                if (price >= minPrice && price < minPrice * 1.02) {
+                    rating = rating * 1.4;
+                } else if (price > maxPrice * 0.97 && price <= maxPrice) {
+                    rating = rating * 0.7;
+                }
 
-            if (rating < 0.78) {
-                status = "Цена поднимется";
-            }
-            MonitorMarketEntity monitorMarketEntity = monitorStatEntityMap.get(el).getMonitorMarketEntity();
-            response.add(MonitorBuilder.buildPredicateDto(status,
-                    monitorMarketEntity.getMarketEntity().getName(),
-                    price,
-                    monitorMarketEntity.getUrl()));
-        });
+                if (rating < 0.78) {
+                    status = "Цена поднимется";
+                }
+                MonitorMarketEntity monitorMarketEntity = monitorStatEntityMap.get(el).getMonitorMarketEntity();
+                response.add(MonitorBuilder.buildPredicateDto(status,
+                        monitorMarketEntity.getMarketEntity().getName(),
+                        price,
+                        monitorMarketEntity.getUrl()));
+            });
+        }
 
         return response;
     }

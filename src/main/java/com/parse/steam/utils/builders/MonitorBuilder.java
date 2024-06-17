@@ -1,5 +1,7 @@
 package com.parse.steam.utils.builders;
 
+import com.parse.steam.dtos.stat.PredicateDto;
+import com.parse.steam.dtos.stat.StatLowestPriceDto;
 import com.parse.steam.entities.MonitorEntity;
 
 public class MonitorBuilder {
@@ -17,5 +19,16 @@ public class MonitorBuilder {
         a.setMatrix(b.getMatrix());
         a.setArchived(b.getArchived());
         return a;
+    }
+
+    public static PredicateDto buildPredicateDto(String status, String marketName, Long price, String url) {
+        PredicateDto dto = new PredicateDto();
+        StatLowestPriceDto stat = new StatLowestPriceDto();
+        stat.setUrl(url);
+        stat.setMarketName(marketName);
+        stat.setPrice(price);
+        dto.setStatus(status);
+        dto.setStatLowestPriceDto(stat);
+        return dto;
     }
 }

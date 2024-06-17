@@ -38,4 +38,11 @@ public interface MonitorStatRepo extends JpaRepository<MonitorStatEntity, Long> 
             "AND mm.monitor_id = :monitorId ", nativeQuery = true)
     MonitorStatEntity findLowestPrice(@Param("marketId") Long marketId,
                                       @Param("monitorId") Long monitorId);
+
+    @Query(value = "SELECT ms.* " +
+            "FROM monitor_stat ms " +
+            "WHERE ms.moment >= CURRENT_DATE - INTERVAL '1 month' " +
+            "and ms.monitor_market_id = :monitorMarketId " +
+            "order by ms.moment desc ", nativeQuery = true)
+    List<MonitorStatEntity> findByInterval(@Param("monitorMarketId") Long monitorMarketId);
 }
