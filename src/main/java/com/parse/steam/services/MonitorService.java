@@ -9,6 +9,7 @@ import com.parse.steam.entities.MonitorMarketEntity;
 import com.parse.steam.entities.MonitorStatEntity;
 import com.parse.steam.exceptions.ElementNotFoundException;
 import com.parse.steam.repo.MarketRepo;
+import com.parse.steam.repo.MonitorMarketRepo;
 import com.parse.steam.repo.MonitorRepo;
 import com.parse.steam.repo.MonitorStatRepo;
 import com.parse.steam.utils.builders.MonitorBuilder;
@@ -25,6 +26,7 @@ import java.util.Map;
 public class MonitorService {
     private final MonitorRepo monitorRepo;
     private final MonitorStatRepo monitorStatRepo;
+    private final MonitorMarketRepo monitorMarketRepo;
     private final MarketRepo marketRepo;
 
     public MonitorDto saveMonitor(MonitorDto dto) {
@@ -71,14 +73,20 @@ public class MonitorService {
 
         List<MarketEntity> allMarkets = marketRepo.findAllActiveMarkets();
         List<PredicateDto> response = new ArrayList<>();
+        Map<Long, MonitorMarketEntity> monitorMarketEntityMap = new HashMap<>();
+        List<MonitorMarketEntity> monitorMarketEntityList = monitorMarketRepo.findAllByMonitorId(itemId);
+
+        monitorMarketEntityList.forEach(el -> {
+            monitorMarketEntityMap.put(el.getId(), el);
+        });
 
         Map<Long, List<MonitorStatEntity>> marketMonitorStatElementsMap = new HashMap<>();
         Map<Long, Long> marketMonitorStatPriceMap = new HashMap<>();
         Map<Long, Boolean> marketPriceInfo = new HashMap<>();
         Map<Long, MonitorStatEntity> monitorStatEntityMap = new HashMap<>();
-        allMarkets.forEach(el -> {
+        monitorMarketEntityList.forEach(el -> {
             List<MonitorStatEntity> entities = monitorStatRepo.findByInterval(el.getId());
-            if (entities.size() > 0) {
+            if (!entities.isEmpty()) {
                 monitorStatEntityMap.put(el.getId(), entities.get(0));
                 marketMonitorStatElementsMap.put(el.getId(), entities);
                 marketMonitorStatPriceMap.put(el.getId(), entities.get(0).getPrice());

@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
+
 public interface MonitorMarketRepo extends JpaRepository<MonitorMarketEntity, Long> {
     @Query(value = "select count(mm.id) from monitor_market mm " +
             "where archived = false " +
@@ -15,4 +17,6 @@ public interface MonitorMarketRepo extends JpaRepository<MonitorMarketEntity, Lo
             "where in_redis = true " +
             "and market_id = :marketId ", nativeQuery = true)
     Long countInRedisByMarketId(@Param("marketId") Long marketId);
+
+    List<MonitorMarketEntity> findAllByMonitorId(Long monitorId);
 }
