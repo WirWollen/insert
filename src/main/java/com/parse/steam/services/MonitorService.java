@@ -101,9 +101,9 @@ public class MonitorService {
 
             if (!middlePrice.equals(currentSum)) {
                 if (currentSum < middlePrice) {
-                    isUp = false;
-                } else {
                     isUp = true;
+                } else {
+                    isUp = false;
                 }
             }
             marketPriceInfo.put(el, isUp);
@@ -137,7 +137,7 @@ public class MonitorService {
                     rating = rating * 0.7;
                 }
 
-                if (rating < 0.78) {
+                if (rating < 0.9) {
                     status = "Цена поднимется";
                 }
                 MonitorMarketEntity monitorMarketEntity = monitorStatEntityMap.get(el).getMonitorMarketEntity();
