@@ -18,26 +18,26 @@ public class WashingMachineStatService {
     private final WashingMachineMarketRepo washingMachineMarketRepo;
     private final MarketRepo marketRepo;
 
-    public PriceTimeDto findStatByMonitorId(Long itemId, Long marketId) {
+    public PriceTimeDto findStatByWashingMachineId(Long itemId, Long marketId) {
         var market = marketRepo.findById(marketId).get();
         return new PriceTimeDto(market.getName(),
                 washingMachineStatRepo.findAllByItemIdAndId(itemId, market.getId()).stream().map(
                         el -> new TimePriceDto(el.getMoment(), el.getPrice())).toList());
     }
 
-    public List<PriceTimeDto> findAllStatByMonitorId(Long itemId) {
+    public List<PriceTimeDto> findAllStatByWashingMachineId(Long itemId) {
         return marketRepo.findAll().stream().map(el2 -> new PriceTimeDto(el2.getName(),
                 washingMachineStatRepo.findAllByItemIdAndId(itemId, el2.getId()).stream().map(
                         el -> new TimePriceDto(el.getMoment(), el.getPrice())).toList())).toList();
     }
 
-    public List<StatCountMonitorMarketDto> countMonitorMarket() {
+    public List<StatCountMonitorMarketDto> countWashingMachineMarket() {
         return marketRepo.findAll().stream().map(MarketConverter::toDto)
                 .toList().stream()
                 .map(el -> new StatCountMonitorMarketDto(el.getName(), washingMachineMarketRepo.countByMarketId(el.getId()))).toList();
     }
 
-    public List<StatCountMonitorMarketDto> countMonitorMarketInRedis() {
+    public List<StatCountMonitorMarketDto> countWashingMachineMarketInRedis() {
         return marketRepo.findAll().stream().map(MarketConverter::toDto)
                 .toList().stream()
                 .map(el -> new StatCountMonitorMarketDto(el.getName(), washingMachineMarketRepo.countInRedisByMarketId(el.getId()))).toList();

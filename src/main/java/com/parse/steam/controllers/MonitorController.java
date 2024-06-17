@@ -15,11 +15,6 @@ import java.util.List;
 public class MonitorController {
     private final MonitorService service;
 
-//    @PostMapping("/monitor-market")
-//    public MonitorMarketDto insertMonitorMarket(@RequestBody MonitorMarketDto dto) {
-//        return monitorService.insertMonitorMarket(dto);
-//    }
-
     @PostMapping("/save")
     public MonitorDto saveMonitor(@RequestBody MonitorDto dto) {
         return service.saveMonitor(dto);

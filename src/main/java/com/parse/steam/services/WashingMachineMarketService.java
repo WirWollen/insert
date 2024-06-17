@@ -22,38 +22,38 @@ public class WashingMachineMarketService {
     private final WashingMachineMarketRepo washingMachineMarketRepo;
     private final RedisRepo redisRepo;
 
-    public WashingMachineMarketDto saveMonitorMarket(WashingMachineMarketDto dto) {
+    public WashingMachineMarketDto saveWashingMachineMarket(WashingMachineMarketDto dto) {
         return WashingMachineMarketConverter.toDto(washingMachineMarketRepo.save(WashingMachineMarketConverter.toEntity(dto)));
     }
 
-    public List<WashingMachineMarketDto> saveMonitorMarketList(List<WashingMachineMarketDto> dtoList) {
+    public List<WashingMachineMarketDto> saveWashingMachineMarketList(List<WashingMachineMarketDto> dtoList) {
         return washingMachineMarketRepo.saveAll(dtoList.stream().map(WashingMachineMarketConverter::toEntity).toList()).stream().map(WashingMachineMarketConverter::toDto).toList();
     }
 
-    public WashingMachineMarketDto archiveMonitorMarket(Long id) throws ElementNotFoundException {
+    public WashingMachineMarketDto archiveWashingMachineMarket(Long id) throws ElementNotFoundException {
         WashingMachineMarketEntity entity = washingMachineMarketRepo.findById(id).orElseThrow(() -> new ElementNotFoundException("washing-machine-market not found"));
         entity.setArchived(true);
         return WashingMachineMarketConverter.toDto(washingMachineMarketRepo.save(entity));
     }
 
-    public WashingMachineMarketDto unarchiveMonitorMarket(Long id) throws ElementNotFoundException {
+    public WashingMachineMarketDto unarchiveWashingMachineMarket(Long id) throws ElementNotFoundException {
         WashingMachineMarketEntity entity = washingMachineMarketRepo.findById(id).orElseThrow(() -> new ElementNotFoundException("washing-machine-market not found"));
         entity.setArchived(false);
         return WashingMachineMarketConverter.toDto(washingMachineMarketRepo.save(entity));
     }
 
-    public WashingMachineMarketDto updateMonitorMarket(WashingMachineMarketDto dto) throws ElementNotFoundException {
+    public WashingMachineMarketDto updateWashingMachineMarket(WashingMachineMarketDto dto) throws ElementNotFoundException {
         WashingMachineMarketEntity entity = washingMachineMarketRepo.findById(dto.getId()).orElseThrow(() -> new ElementNotFoundException("washing-machine-market not found"));
         WashingMachineMarketEntity updatedEntity = WashingMachineMarketBuilder.buildUpdatedMonitorMarketEntity(entity, WashingMachineMarketConverter.toEntity(dto));
         updatedEntity = washingMachineMarketRepo.save(updatedEntity);
         return WashingMachineMarketConverter.toDto(updatedEntity);
     }
 
-    public WashingMachineMarketDto getMonitorMarketById(Long id) throws ElementNotFoundException {
+    public WashingMachineMarketDto getWashingMachineMarketById(Long id) throws ElementNotFoundException {
         return WashingMachineMarketConverter.toDto(washingMachineMarketRepo.findById(id).orElseThrow(() -> new ElementNotFoundException("washing-machine-market not found")));
     }
 
-    public List<WashingMachineMarketDto> getAllMonitorMarket() {
+    public List<WashingMachineMarketDto> getAllWashingMachineMarket() {
         return washingMachineMarketRepo.findAll().stream().map(WashingMachineMarketConverter::toDto).toList();
     }
 

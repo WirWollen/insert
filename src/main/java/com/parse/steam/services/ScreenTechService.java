@@ -1,6 +1,8 @@
 package com.parse.steam.services;
 
+import com.parse.steam.converters.OsConverter;
 import com.parse.steam.converters.ScreenTechConverter;
+import com.parse.steam.dtos.OsDto;
 import com.parse.steam.dtos.ScreenTechDto;
 import com.parse.steam.entities.ScreenTechEntity;
 import com.parse.steam.exceptions.ElementNotFoundException;
@@ -49,5 +51,9 @@ public class ScreenTechService {
 
     public List<ScreenTechDto> getAllScreenTech() {
         return screenTechRepo.findAll().stream().map(ScreenTechConverter::toDto).toList();
+    }
+
+    public ScreenTechDto getScreenTechByName(String name) throws ElementNotFoundException {
+        return ScreenTechConverter.toDto(screenTechRepo.findByName(name).orElseThrow(() -> new ElementNotFoundException("creen tech not found")));
     }
 }
