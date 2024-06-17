@@ -38,4 +38,11 @@ public interface TVStatRepo extends JpaRepository<TVStatEntity, Long> {
             "AND tm.tv_id = :tvId ", nativeQuery = true)
     TVStatEntity findLowestPrice(@Param("marketId") Long marketId,
                                  @Param("tvId") Long tvId);
+
+    @Query(value = "SELECT ms.* " +
+            "FROM tv_stat ms " +
+            "WHERE ms.moment >= CURRENT_DATE - INTERVAL '1 month' " +
+            "and ms.tv_market_id = :tvMarketId " +
+            "order by ms.moment desc ", nativeQuery = true)
+    List<TVStatEntity> findByInterval(@Param("tvMarketId") Long tvMarketId);
 }

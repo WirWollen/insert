@@ -14,6 +14,7 @@ import com.parse.steam.repo.MonitorRepo;
 import com.parse.steam.repo.MonitorStatRepo;
 import com.parse.steam.utils.builders.MonitorBuilder;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -27,7 +28,28 @@ public class MonitorService {
     private final MonitorRepo monitorRepo;
     private final MonitorStatRepo monitorStatRepo;
     private final MonitorMarketRepo monitorMarketRepo;
-    private final MarketRepo marketRepo;
+
+    @Value("${coefficient.middle.buff}")
+    private Double coefficientMiddleBuff;
+    @Value("${coefficient.middle.debuff}")
+    private Double coefficientMiddleDebuff;
+
+    @Value("${coefficient.price-info.buff}")
+    private Double coefficientPriceInfoBuff;
+    @Value("${coefficient.price-info.debuff}")
+    private Double coefficientPriceInfoDebuff;
+
+    @Value("${coefficient.correct.buff}")
+    private Double coefficientCorrectBuff;
+    @Value("${coefficient.correct.debuff}")
+    private Double coefficientCorrectDebuff;
+
+    @Value("${coefficient.percent.up}")
+    private Double percentUp;
+    @Value("${coefficient.percent.down}")
+    private Double percentDown;
+    @Value("${coefficient.percent.rating}")
+    private Double percentRating;
 
     public MonitorDto saveMonitor(MonitorDto dto) {
         return MonitorConverter.toDto(monitorRepo.save(MonitorConverter.toEntity(dto)));
@@ -114,28 +136,28 @@ public class MonitorService {
                 double rating = 1;
 
                 if (price < middlePrice) {
-                    rating = rating * 1.2;
+                    rating = rating * coefficientMiddleBuff;
                 } else if (price > middlePrice) {
-                    rating = rating * 0.8;
+                    rating = rating * coefficientMiddleDebuff;
                 }
 
                 if (marketPriceInfo.get(el)) {
-                    rating = rating * 0.8;
+                    rating = rating * coefficientPriceInfoDebuff;
                 } else if (!marketPriceInfo.get(el)) {
-                    rating = rating * 1.3;
+                    rating = rating * coefficientPriceInfoBuff;
                 }
 
-                if (price >= minPrice && price < minPrice * 1.02) {
-                    rating = rating * 1.4;
-                } else if (price > maxPrice * 0.97 && price <= maxPrice) {
-                    rating = rating * 0.7;
+                if (price >= minPrice && price < minPrice * percentDown) {
+                    rating = rating * coefficientCorrectBuff;
+                } else if (price > maxPrice * percentUp && price <= maxPrice) {
+                    rating = rating * coefficientCorrectDebuff;
                 }
 
-                if (rating < 0.9) {
+                if (rating < percentRating) {
                     status = "Цена поднимется";
                 }
                 MonitorMarketEntity monitorMarketEntity = monitorStatEntityMap.get(el).getMonitorMarketEntity();
-                response.add(MonitorBuilder.buildPredicateDto(status,
+                response.add(UniversalBuilder.buildPredicateDto(status,
                         monitorMarketEntity.getMarketEntity().getName(),
                         price,
                         monitorMarketEntity.getUrl()));
