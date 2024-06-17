@@ -71,7 +71,6 @@ public class MonitorService {
             return new ArrayList<>();
         }
 
-        List<MarketEntity> allMarkets = marketRepo.findAllActiveMarkets();
         List<PredicateDto> response = new ArrayList<>();
         Map<Long, MonitorMarketEntity> monitorMarketEntityMap = new HashMap<>();
         List<MonitorMarketEntity> monitorMarketEntityList = monitorMarketRepo.findAllByMonitorId(itemId);
