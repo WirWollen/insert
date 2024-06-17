@@ -72,12 +72,7 @@ public class MonitorService {
         }
 
         List<PredicateDto> response = new ArrayList<>();
-        Map<Long, MonitorMarketEntity> monitorMarketEntityMap = new HashMap<>();
         List<MonitorMarketEntity> monitorMarketEntityList = monitorMarketRepo.findAllByMonitorId(itemId);
-
-        monitorMarketEntityList.forEach(el -> {
-            monitorMarketEntityMap.put(el.getId(), el);
-        });
 
         Map<Long, List<MonitorStatEntity>> marketMonitorStatElementsMap = new HashMap<>();
         Map<Long, Long> marketMonitorStatPriceMap = new HashMap<>();
