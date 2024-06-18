@@ -1,6 +1,5 @@
 package com.parse.steam.repo;
 
-import com.parse.steam.entities.TVStatEntity;
 import com.parse.steam.entities.WashingMachineStatEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -39,4 +38,11 @@ public interface WashingMachineStatRepo extends JpaRepository<WashingMachineStat
             "AND wmm.washing_machine_id = :washingMachineId ", nativeQuery = true)
     WashingMachineStatEntity findLowestPrice(@Param("marketId") Long marketId,
                                              @Param("washingMachineId") Long washingMachineId);
+
+    @Query(value = "SELECT ms.* " +
+            "FROM washing_machine_stat ms " +
+            "WHERE ms.moment >= CURRENT_DATE - INTERVAL '1 month' " +
+            "and ms.washing_machine_market_id = :washingMachineMarketId " +
+            "order by ms.moment desc ", nativeQuery = true)
+    List<WashingMachineStatEntity> findByInterval(@Param("washingMachineMarketId") Long washingMachineMarketId);
 }

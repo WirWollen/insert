@@ -1,6 +1,7 @@
 package com.parse.steam.controllers;
 
 import com.parse.steam.dtos.TVDto;
+import com.parse.steam.dtos.stat.PredicateDto;
 import com.parse.steam.exceptions.ElementNotFoundException;
 import com.parse.steam.services.TVService;
 import lombok.AllArgsConstructor;
@@ -48,5 +49,10 @@ public class TVController {
     @GetMapping("/get-all")
     public List<TVDto> getAllTV() {
         return service.getAllTV();
+    }
+
+    @GetMapping("/predicate")
+    public List<PredicateDto> predicatePrice(@RequestParam Long itemId) {
+        return service.predicateUpPrice(itemId);
     }
 }

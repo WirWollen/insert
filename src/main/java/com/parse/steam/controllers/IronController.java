@@ -2,6 +2,7 @@ package com.parse.steam.controllers;
 
 import com.parse.steam.dtos.IronDto;
 import com.parse.steam.dtos.TVDto;
+import com.parse.steam.dtos.stat.PredicateDto;
 import com.parse.steam.exceptions.ElementNotFoundException;
 import com.parse.steam.services.IronService;
 import com.parse.steam.services.TVService;
@@ -50,5 +51,10 @@ public class IronController {
     @GetMapping("/get-all")
     public List<IronDto> getAllTV() {
         return service.getAllIron();
+    }
+
+    @GetMapping("/predicate")
+    public List<PredicateDto> predicatePrice(@RequestParam Long itemId) {
+        return service.predicateUpPrice(itemId);
     }
 }

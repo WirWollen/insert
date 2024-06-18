@@ -1,7 +1,6 @@
 package com.parse.steam.repo;
 
 import com.parse.steam.entities.IronStatEntity;
-import com.parse.steam.entities.MonitorStatEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -39,4 +38,11 @@ public interface IronStatRepo extends JpaRepository<IronStatEntity, Long> {
             "AND irm.iron_id = :ironId ", nativeQuery = true)
     IronStatEntity findLowestPrice(@Param("marketId") Long marketId,
                                    @Param("ironId") Long ironId);
+
+    @Query(value = "SELECT ms.* " +
+            "FROM iron_stat ms " +
+            "WHERE ms.moment >= CURRENT_DATE - INTERVAL '1 month' " +
+            "and ms.iron_market_id = :ironMarketId " +
+            "order by ms.moment desc ", nativeQuery = true)
+    List<IronStatEntity> findByInterval(@Param("ironMarketId") Long ironMarketId);
 }

@@ -1,6 +1,7 @@
 package com.parse.steam.controllers;
 
 import com.parse.steam.dtos.WashingMachineDto;
+import com.parse.steam.dtos.stat.PredicateDto;
 import com.parse.steam.exceptions.ElementNotFoundException;
 import com.parse.steam.services.WashingMachineService;
 import lombok.AllArgsConstructor;
@@ -48,5 +49,10 @@ public class WashingMachineController {
     @GetMapping("/get-all")
     public List<WashingMachineDto> getAllWashingMachine() {
         return service.getAllWashingMachine();
+    }
+
+    @GetMapping("/predicate")
+    public List<PredicateDto> predicatePrice(@RequestParam Long itemId) {
+        return service.predicateUpPrice(itemId);
     }
 }
