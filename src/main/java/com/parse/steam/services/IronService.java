@@ -9,7 +9,7 @@ import com.parse.steam.repo.IronMarketRepo;
 import com.parse.steam.repo.IronRepo;
 import com.parse.steam.repo.IronStatRepo;
 import com.parse.steam.utils.builders.IronBuilder;
-import com.parse.steam.utils.builders.MonitorBuilder;
+import com.parse.steam.utils.builders.UniversalBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -154,10 +154,7 @@ public class IronService {
                     status = "Цена поднимется";
                 }
                 IronMarketEntity ironMarketEntity = ironStatEntityMap.get(el).getIronMarketEntity();
-                response.add(UniversalBuilder.buildPredicateDto(status,
-                        ironMarketEntity.getMarket().getName(),
-                        price,
-                        ironMarketEntity.getUrl()));
+                response.add(UniversalBuilder.buildPredicateDto(status, ironMarketEntity.getMarket().getName()));
             });
         }
 

@@ -51,7 +51,7 @@ public class WashingMachineController {
         return service.getAllWashingMachine();
     }
 
-    @GetMapping("/predicate")
+    @PostMapping("/predicate")
     public List<PredicateDto> predicatePrice(@RequestParam Long itemId) {
         return service.predicateUpPrice(itemId);
     }

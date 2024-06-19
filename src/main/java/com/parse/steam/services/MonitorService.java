@@ -11,6 +11,7 @@ import com.parse.steam.repo.MonitorMarketRepo;
 import com.parse.steam.repo.MonitorRepo;
 import com.parse.steam.repo.MonitorStatRepo;
 import com.parse.steam.utils.builders.MonitorBuilder;
+import com.parse.steam.utils.builders.UniversalBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -155,10 +156,7 @@ public class MonitorService {
                     status = "Цена поднимется";
                 }
                 MonitorMarketEntity monitorMarketEntity = monitorStatEntityMap.get(el).getMonitorMarketEntity();
-                response.add(UniversalBuilder.buildPredicateDto(status,
-                        monitorMarketEntity.getMarketEntity().getName(),
-                        price,
-                        monitorMarketEntity.getUrl()));
+                response.add(UniversalBuilder.buildPredicateDto(status, monitorMarketEntity.getMarketEntity().getName()));
             });
         }
 

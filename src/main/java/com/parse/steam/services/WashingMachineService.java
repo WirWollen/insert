@@ -8,6 +8,7 @@ import com.parse.steam.exceptions.ElementNotFoundException;
 import com.parse.steam.repo.WashingMachineMarketRepo;
 import com.parse.steam.repo.WashingMachineRepo;
 import com.parse.steam.repo.WashingMachineStatRepo;
+import com.parse.steam.utils.builders.UniversalBuilder;
 import com.parse.steam.utils.builders.WashingMachineBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -153,10 +154,7 @@ public class WashingMachineService {
                     status = "Цена поднимется";
                 }
                 WashingMachineMarketEntity washingMachineMarketEntity = washingMachineStatEntityMap.get(el).getWashingMachineMarket();
-                response.add(UniversalBuilder.buildPredicateDto(status,
-                        washingMachineMarketEntity.getMarketEntity().getName(),
-                        price,
-                        washingMachineMarketEntity.getUrl()));
+                response.add(UniversalBuilder.buildPredicateDto(status, washingMachineMarketEntity.getMarketEntity().getName()));
             });
         }
 

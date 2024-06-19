@@ -12,6 +12,6 @@ import org.springframework.stereotype.Service;
 @Setter
 @AllArgsConstructor
 public class PredicateDto {
-    private StatLowestPriceDto statLowestPriceDto;
+    private String marketName;
     private String status;
 }

@@ -8,8 +8,8 @@ import com.parse.steam.exceptions.ElementNotFoundException;
 import com.parse.steam.repo.TVMarketRepo;
 import com.parse.steam.repo.TVRepo;
 import com.parse.steam.repo.TVStatRepo;
-import com.parse.steam.utils.builders.MonitorBuilder;
 import com.parse.steam.utils.builders.TVBuilder;
+import com.parse.steam.utils.builders.UniversalBuilder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -154,10 +154,7 @@ public class TVService {
                     status = "Цена поднимется";
                 }
                 TVMarketEntity tvMarketEntity = tvStatEntityMap.get(el).getTvMarket();
-                response.add(UniversalBuilder.buildPredicateDto(status,
-                        tvMarketEntity.getMarket().getName(),
-                        price,
-                        tvMarketEntity.getUrl()));
+                response.add(UniversalBuilder.buildPredicateDto(status, tvMarketEntity.getMarket().getName()));
             });
         }
 

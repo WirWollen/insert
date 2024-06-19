@@ -51,7 +51,7 @@ public class MonitorController {
         return service.getAllMonitor();
     }
 
-    @GetMapping("/predicate")
+    @PostMapping("/predicate")
     public List<PredicateDto> predicatePrice(@RequestParam Long itemId) {
         return service.predicateUpPrice(itemId);
     }

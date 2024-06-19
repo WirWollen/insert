@@ -53,7 +53,7 @@ public class IronController {
         return service.getAllIron();
     }
 
-    @GetMapping("/predicate")
+    @PostMapping("/predicate")
     public List<PredicateDto> predicatePrice(@RequestParam Long itemId) {
         return service.predicateUpPrice(itemId);
     }
