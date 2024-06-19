@@ -68,9 +68,11 @@ public class IronStatService {
                     dto.setMarketName(el.getName());
                     Long price = 0L;
                     var entity = ironStatRepo.findLowestPrice(el.getId(), itemId);
-                    if (entity != null) price = entity.getPrice();
+                    if (entity != null) {
+                        price = entity.getPrice();
+                        dto.setUrl(entity.getIronMarketEntity().getUrl());
+                    }
                     dto.setPrice(price);
-                    dto.setUrl(el.getUrl());
                     return dto;
                 }).toList();
     }

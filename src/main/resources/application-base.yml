@@ -49,7 +49,7 @@ coefficient:
     debuff: 0.8
   price-info:
     buff: 1.3
-    debuff: 0.5
+    debuff: 0.8
   correct:
     buff: 1.4
     debuff: 0.7

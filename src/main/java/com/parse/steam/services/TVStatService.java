@@ -51,9 +51,11 @@ public class TVStatService {
                     dto.setMarketName(el.getName());
                     Long price = 0L;
                     var entity = tvStatRepo.findLastPrice(el.getId(), itemId);
-                    if (entity != null) price = entity.getPrice();
+                    if (entity != null) {
+                        price = entity.getPrice();
+                        dto.setUrl(entity.getTvMarket().getUrl());
+                    }
                     dto.setPrice(price);
-                    dto.setUrl(el.getUrl());
                     return dto;
                 }).toList();
     }

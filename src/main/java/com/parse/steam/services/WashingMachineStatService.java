@@ -51,9 +51,11 @@ public class WashingMachineStatService {
                     dto.setMarketName(el.getName());
                     Long price = 0L;
                     var entity = washingMachineStatRepo.findLastPrice(el.getId(), itemId);
-                    if (entity != null) price = entity.getPrice();
+                    if (entity != null) {
+                        price = entity.getPrice();
+                        dto.setUrl(entity.getWashingMachineMarket().getUrl());
+                    }
                     dto.setPrice(price);
-                    dto.setUrl(el.getUrl());
                     return dto;
                 }).toList();
     }

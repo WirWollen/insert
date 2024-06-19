@@ -50,9 +50,11 @@ public class MonitorStatService {
                     dto.setMarketName(el.getName());
                     Long price = 0L;
                     var entity = monitorStatRepo.findLastPrice(el.getId(), itemId);
-                    if (entity != null) price = entity.getPrice();
+                    if (entity != null) {
+                        price = entity.getPrice();
+                        dto.setUrl(entity.getMonitorMarketEntity().getUrl());
+                    }
                     dto.setPrice(price);
-                    dto.setUrl(el.getUrl());
                     return dto;
                 }).toList();
     }
