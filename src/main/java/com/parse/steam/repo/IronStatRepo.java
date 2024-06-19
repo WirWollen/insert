@@ -11,7 +11,7 @@ public interface IronStatRepo extends JpaRepository<IronStatEntity, Long> {
     @Query(value = "select irs.* " +
             "from iron_stat irs " +
             "join iron_market irm on irs.iron_market_id = irm.id " +
-            "where mm.iron_id = :itemId " +
+            "where irm.iron_id = :itemId " +
             "and irm.market_id = :marketId " +
             "order by moment desc", nativeQuery = true)
     List<IronStatEntity> findAllByItemIdAndId(@Param("itemId") Long itemId,
